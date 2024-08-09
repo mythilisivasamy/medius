@@ -1,13 +1,554 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+:root {
+  --default-font: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --heading-font: 'Nunito', sans-serif;
+  --nav-font: 'Inter', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+:root {
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #3d4348; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #1ee07f; /* Color for headings, subheadings and title throughout the website */
+  --heading-contrast-color: #fff; /* contrast color for text in heading */
+  --accent-color: #1ee07f; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #f0f7f1; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #063125; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
+
+/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+:root {
+  --nav-color: #fff; /* The default color of the main navmenu links */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #313336; /* Used for navigation links of the dropdown items in the navigation menu. */
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--contrast-color);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+}
+
+/* header style */
+.header {
+  background-color: var(--contrast-color);
+  padding: 20px 0;
+  transition: all 0.5s;
+  color: var(--heading-contrast-color);
+}
+.header .logo {
+  line-height: 1;
+  margin-right: 30px;
+}
+
+.header .logo h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--heading-contrast-color);
+}
+
+.header .signin i {
+  margin-right: 40px;
+}
+.header .signin span {
+  margin-right: 20px;
+  font-family: var(--nav-font);
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 30px;
+}
+.header .signin span:hover {
+  background-color: var(--background-color);
+  color: var(--contrast-color);
+  border-radius: 20px;
+}
+.header i {
+  font-size: 15px;
+  line-height: 0;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  padding: 8px;
+}
+.navmenu .dropdown .dropdown-menu i {
+  visibility: hidden;
+  opacity: 0;
+  font-size: 25px;
+  line-height: 0;
+}
+.navmenu .dropdown .dropdown-menu {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  color: var(--default-color);
+  padding: 0 10px;
+  border: none;
+  margin: 0px 10px;
+}
+.navmenu .dropdown .dropdown-menu .for-agents {
+  background-color: orange;
+  padding: 0 5px;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-top: 10px;
+  height: 25px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: -0.5rem;
+}
+.find-out h1 {
+  font-size: 72px;
+  font-weight: 700;
+  font-family: var(--heading-font);
+  color: var(--default-color);
+}
+/* Desktop Navigation */
+@media (min-width: 1200px) {
+  .navmenu {
+    padding: 0;
+    z-index: 3;
+  }
+
+  .navmenu ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+  .navmenu li {
+    position: relative;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-color);
+    padding: 10px 30px;
+    font-family: var(--nav-font);
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    transition: 0.3s;
+    margin-bottom: 5px;
+  }
+  .navmenu .dropdown:hover a {
+    background-color: var(--background-color);
+    color: var(--contrast-color);
+    border-radius: 20px;
+  }
+  .navmenu .dropdown ul {
+    margin: 0;
+    padding: 10px 5;
+    background: var(--nav-dropdown-background-color);
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    left: 26px;
+    top: 130%;
+    opacity: 0;
+    transition: 0.3s;
+    width: 320px;
+    border-radius: 20px;
+  }
+
+  .navmenu .dropdown .dropdown-menu span {
+    padding-top: 8px;
+  }
+  .navmenu .dropdown li:first-child {
+    margin-top: 5px;
+  }
+  .navmenu .dropdown li:last-child {
+    margin-bottom: 5px;
+  }
+  .navmenu .dropdown .dropdown-menu:hover {
+    background-color: var(--surface-color);
+  }
+
+  .navmenu .dropdown .dropdown-menu:hover i {
+    visibility: visible;
+    opacity: 1;
+  }
+  .navmenu .dropdown:hover > ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+  }
+  .made-simple .mortgage {
+    position: absolute;
+    top: 0px;
+    font-size: 72px;
+    font-weight: bold;
+    font-family: var(--heading-font);
+    z-index: 1;
+    text-align: center;
+  }
+}
+/*Mobile navigation */
+@media (max-width: 1199px) {
+  .header .mobile-nav-toggle {
+    color: var(--heading-contrast-color);
+    font-size: 28px;
+    line-height: 0;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+    border: none;
+    border-radius: 0%;
+  }
+  .navmenu {
+    padding: 0;
+  }
+  .navmenu ul {
+    display: none; /* Hidden by default */
+    list-style: none;
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: var(--background-color); /* Fallback color */
+    color: var(var(--contrast-color)); /* Black w/ opacity */
+    margin: 0px;
+  }
+  .navmenu ul li:first-child {
+    margin-top: 30px;
+  }
+  .navmenu .dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+    z-index: 2;
+    color: var(--default-color);
+  }
+  .navmenu .dropdown .callus {
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: var(--surface-color);
+  }
+  .navmenu .dropdown .get-started {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+    background-color: var(--accent-color);
+    padding: 5px 0;
+    cursor: pointer;
+  }
+  .navmenu .dropdown .get-started:hover {
+    background-color: var(--contrast-color);
+    color: var(--heading-contrast-color);
+  }
+  .navmenu .dropdown .get-started p {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .navmenu .dropdown .get-started span {
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .navmenu .dropdown .callus span {
+    text-decoration: underline;
+  }
+  .navmenu .dropdown .sign-in {
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+    border: 1px solid var(--contrast-color);
+    cursor: pointer;
+    align-items: center;
+  }
+  .navmenu .dropdown .sign-in p {
+    margin: 0;
+  }
+  .navmenu .dropdown .sign-in:hover {
+    outline: 3px solid var(--contrast-color);
+  }
+  .navmenu .dropdown .sign-in:hover p {
+    color: var(--accent-color);
+  }
+  .navmenu .dropdown span {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5px;
+  }
+  .navmenu .dropdown span i {
+    margin-right: 40px;
+  }
+  .navmenu .dropdown span a,
+  .navmenu .dropdown span i {
+    font-size: 16px;
+    font-family: var(--heading-font);
+    font-weight: 800;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .navmenu .dropdown .better {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .navmenu .dropdown > ul {
+    margin: 0;
+    color: #fff;
+    position: relative;
+    display: none;
+    inset: 5px 10px;
+    flex-direction: column;
+    transition: 0.3s;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .navmenu .dropdown > ul li:hover {
+    background-color: var(--surface-color);
+  }
+  .navmenu .dropdown .better-duo {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  .navmenu .dropdown .better-duo span {
+    padding-right: 10px;
+  }
+
+  .navmenu .dropdown .menu-active i {
+    transform: rotate(90deg);
+  }
+  .navmenu .dropdown .menu-active + ul {
+    display: flex;
+  }
+  .made-simple .mortgage {
+    position: absolute;
+    top: 0px;
+    font-size: 52px;
+    font-weight: bold;
+    font-family: var(--heading-font);
+    z-index: 1;
+    text-align: center;
+  }
+}
+
+/* footer section */
+footer,
+.footer {
+  background-color: var(--background-color);
+  margin-top: 130px;
+}
+.footer h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--contrast-color);
+}
+.footer h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--contrast-color);
+}
+.footer h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--contrast-color);
+}
+.footer p {
+  font-size: 16px;
+  color: var(--default-color);
+}
+
+.footer .line p {
+  transition: text-decoration 3s ease-in;
+  cursor: pointer;
+}
+.footer .line p:hover {
+  text-decoration: underline;
+}
+.footer .hr-line {
+  width: 1997px;
+  margin: 0;
+  height: 1px;
+  background-color: color-mix(in srgb, var(--default-color), transparent 65%);
+}
+
+/* made simple */
+.made-simple {
+  margin-top: 100px;
+  background-color: var(--contrast-color);
+}
+.made-simple span {
+  color: var(--heading-contrast-color);
+}
+
+.made-simple .btn-lg-dark {
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
+  padding: 20px 40px;
+  border-radius: 40px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.made-simple .btn-lg-dark:hover {
+  color: #fff;
+  background-color: var(--contrast-color);
+}
+.bi-star-fill {
+  color: yellow !important;
+}
+
+@media (max-width: 767px) {
+  .made-simple .g-star {
+    position: absolute;
+    background: transparent;
+    top: 85%;
+  }
+  .made-simple .mortgage {
+    position: absolute;
+    top: 0px;
+    font-size: 32px;
+    font-weight: 600;
+    font-family: var(--heading-font);
+    z-index: 1;
+    text-align: center;
+  }
+  .find-out h1 {
+    font-size: 42px;
+    font-weight: 700;
+    font-family: var(--heading-font);
+    color: var(--default-color);
+  }
+  .feature span {
+    margin-left: 5px;
+  }
+}
+
+/* find-out section */
+
+.find-out img {
+  width: 340px;
+  height: 600px;
+  border-radius: 20px;
+}
+.find-out .btn-outline-sm {
+  flex-shrink: 0;
+  padding: 15px 20px;
+  outline: 1px solid var(--default-color);
+  margin: 20px 5px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.find-out .featured,
+.find-out .btn-outline-sm:hover {
+  outline: 5px solid var(--contrast-color);
+}
+
+.find-out .btn-lg-light {
+  background-color: #063125;
+}
+.find-out .see-all {
+  background-color: var(--contrast-color);
+  font-size: 18px;
+  font-weight: bold;
+  font-family: var(--heading-font);
+  color: #fff;
+  text-align: center;
+  padding: 20px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.find-out .see-all:hover {
+  background-color: #1aae7f;
+}
+.find-out .bi-star-fill {
+  color: var(--accent-color) !important;
+}
+
+/* Feature section */
+
+.feature h1 {
+  color: var(--default-color);
+  font-size: 48px;
+  font-family: var(--heading-font);
+  font-weight: 700;
+}
+.feature h3 {
+  color: var(--default-color);
+  font-size: 22px;
+  font-family: var(--heading-font);
+  font-weight: 600;
+}
+.feature span {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--heading-font);
+  color: var(--default-color);
+  text-align: center;
+  padding: 5px 10px;
+  outline: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: outline 0.1s ease;
+  margin-left: 15px;
+}
+.feature span:hover {
+  outline: 2px solid var(--contrast-color);
+}
+.feature .featured {
+  outline: 2px solid var(--contrast-color);
+}
+
+.feature .icon {
+  outline: 2px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.feature .icon:hover {
+  color: var(--heading-contrast-color);
+  background-color: var(--contrast-color);
+  outline: 0;
+}
+.feature .icon i {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.feature .surface {
+  background-color: var(--surface-color);
+  border-radius: 10px;
 }
